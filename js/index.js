@@ -30,7 +30,6 @@ var bird = {
       if (this.animateFlage) {
         this.birdDrop()
         this.pipeMove()
-        this.addScore()
       }
       if (count % 10 === 0) {
         if (!this.animateFlage) {
@@ -87,6 +86,7 @@ var bird = {
     this.birdTop += ++this.birdDropSpeed
     this.oBird.style.top = this.birdTop + 'px'
     this.crashTest()
+    this.addScore()
 
   },
   // 碰撞检测
@@ -203,10 +203,7 @@ var bird = {
       score: finalScore
     }
     var record = window.getLocalStorage('record')
-    if (!record) {
-      this.gameResults.push(gameResult)
-      setLocalStorage('record', this.gameResults)
-    }
+    record = record? record : []
     record.push(gameResult)
     record = record.sort((a, b) => {
       return b.score - a.score
